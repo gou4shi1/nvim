@@ -14,4 +14,9 @@ return {
     lazy = false,
     priority = 9000,
   },
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+  },
 }

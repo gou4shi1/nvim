@@ -1,0 +1,95 @@
+{
+  // General Config
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.enableLinkedEditing": true,
+  "coc.preferences.tagDefinitionTimeout": 1200,
+
+  "coc.source.around.priority": 100,
+
+  "codeLens.enable": true,
+
+  "diagnostic.enableMessage": "jump",
+  "diagnostic.virtualText": false,
+  "diagnostic.virtualTextAlign": "right",
+  "diagnostic.virtualTextLevel": "warning",
+  "diagnostic.virtualTextLimitInOneLine": 1,
+  "diagnostic.virtualTextLines": 1,
+  "diagnostic.virtualTextPrefix": "   ",
+
+  "inlayHint.display": false,
+
+  "outline.previewBorderRounded": true,
+
+  "semanticTokens.enable": true,
+
+  "session.saveOnVimLeave": false,
+
+  "snippets.snipmate.enable": false,
+
+  "suggest.completionItemKindLabels": {
+    "text": "󰉿 text",
+    "method": "󰆧 method",
+    "function": "󰊕 func",
+    "constructor": " ctor",
+    "field": "󰜢 field",
+    "variable": "󰀫 var",
+    "class": "󰠱 class",
+    "interface": " interface",
+    "module": " module",
+    "property": "󰜢 prop",
+    "unit": "󰑭 unit",
+    "value": "󰎠 value",
+    "enum": " enum",
+    "keyword": "󰌋 keyword",
+    "snippet": " snippet",
+    "color": "󰏘 color",
+    "file": "󰈙 file",
+    "reference": "󰈇 ref",
+    "folder": "󰉋 folder",
+    "enumMember": " enum",
+    "constant": "󰏿 const",
+    "struct": "󰙅 struct",
+    "event": " event",
+    "operator": "󰆕 operator",
+    "default": " default",
+    "typeParameter": " param"
+  },
+  "suggest.defaultSortMethod": "none",
+  "suggest.labelMaxLength": 100,
+  "suggest.reversePumAboveCursor": true,
+  "suggest.virtualText": true,
+
+  "yank.highlight.enable": false,
+
+  // Language Config
+  "go.goplsOptions": {
+    "semanticTokens": true,
+    "gofumpt": true
+  },
+
+  "python.pythonPath": "python3",
+  "python.formatting.provider": "yapf",
+
+  "Lua.diagnostics.globals": ["vim"],
+
+  "languageserver": {
+    "nix": {
+      "command": "nil",
+      "filetypes": ["nix"],
+      "settings": {
+        "nil": {
+          "formatting": { "command": ["nixpkgs-fmt"] }
+        }
+      }
+    },
+    "asm-lsp": {
+      "command": "asm-lsp",
+      "filetypes": [
+        "asm",
+        "gas",
+        "s",
+        "S"
+      ]
+    }
+  }
+}

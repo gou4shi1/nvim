@@ -36,6 +36,19 @@ return {
             padding = { left = 1, right = 0 }
           },
           { LazyVim.lualine.pretty_path() },
+          {
+            'b:coc_current_function',
+            color = {
+              gui = 'italic',
+              fg = Snacks.util.color("Function"),
+            },
+          },
+          {
+            'g:coc_status',
+            color = {
+              fg = Snacks.util.color("Comment"),
+            },
+          },
         },
 
         lualine_x = {

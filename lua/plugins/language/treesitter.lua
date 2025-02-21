@@ -100,4 +100,16 @@ return {
       end
     end,
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+    opts = {
+      max_lines = 1,
+    },
+    config = function(_, opts)
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true })
+      require("treesitter-context").setup(opts)
+    end,
+  },
 }

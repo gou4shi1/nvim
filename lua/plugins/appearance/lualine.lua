@@ -79,7 +79,7 @@ return {
         },
         lualine_z = { "encoding" },
       },
-      extensions = { "lazy" },
+      extensions = { "lazy", "fzf" },
     }
 
     return opts

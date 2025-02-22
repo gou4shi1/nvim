@@ -7,8 +7,10 @@ return {
       { "[",         group = "prev" },
       { "]",         group = "next" },
       { "<leader>b", group = "buffer" },
+      { "<leader>g", group = "git" },
       { "<leader>n", group = "notice" },
       { "<Leader>t", group = "to" },
+      { "<C-f>", group = "find" },
     },
   },
   keys = {

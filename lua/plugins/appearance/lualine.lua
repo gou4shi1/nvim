@@ -72,6 +72,18 @@ return {
               hint  = " ",
             },
           },
+          {
+            "diff",
+            source = function()
+              local summary = vim.b.minidiff_summary
+              return summary
+                  and {
+                    added = summary.add,
+                    modified = summary.change,
+                    removed = summary.delete,
+                  }
+            end,
+          },
         },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },

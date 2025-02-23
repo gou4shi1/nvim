@@ -12,7 +12,7 @@ return {
     notifier = { enabled = true },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
-    -- statuscolumn = { enabled = true },
+    statuscolumn = { enabled = true },
     -- scroll = { enabled = true },
     dashboard = {
       sections = {

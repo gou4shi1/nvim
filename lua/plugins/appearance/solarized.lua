@@ -11,5 +11,6 @@ return {
     vim.cmd.colorscheme 'solarized'
 
     vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true })
+    vim.api.nvim_set_hl(0, "CursorLineGitBlame", { fg = "#4b5c6d", italic = true })
   end,
 }

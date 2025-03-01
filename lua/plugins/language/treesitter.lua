@@ -112,4 +112,10 @@ return {
       require("treesitter-context").setup(opts)
     end,
   },
+
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 }

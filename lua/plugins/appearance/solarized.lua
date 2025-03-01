@@ -6,7 +6,10 @@ return {
     on_highlights = function(colors, color)
       return {
         SpellBad = { undercurl = true, strikethrough = false },
+        -- git
         CursorLineGitBlame = { fg = "#4b5c6d", italic = true },
+        DiffAdded = { fg = colors.git_add },
+        DiffRemoved = { fg = colors.git_delete },
         -- semantic
         Parameter = { link = "Identifier" },
         CocSemTypeEnumMember = { fg = "#AD7FA8" },

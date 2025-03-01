@@ -35,7 +35,7 @@ return {
     modes = {
       char = {
         jump_labels = true,
-        label = { exclude = "hjkliardcv" },
+        label = { exclude = "hjkliardcvz" },
         char_actions = function()
           return {
             [";"] = "next",

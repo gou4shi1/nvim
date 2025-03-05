@@ -19,6 +19,9 @@ return {
       end
       config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-root-dir")
 
+      -- Dump all/selected items to the trouble list.
+      config.defaults.actions.files["ctrl-q"] = require("trouble.sources.fzf").actions.open
+
       return {
         "hide",
         "default-title",
@@ -64,7 +67,6 @@ return {
             ["ctrl-b"] = "half-page-up",
             ["ctrl-f"] = "half-page-down",
             ["ctrl-p"] = "jump",
-            ["ctrl-q"] = "select-all+accept", -- to quickfix
           },
         },
 

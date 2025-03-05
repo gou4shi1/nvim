@@ -96,6 +96,7 @@ return {
         require("lazy.util").open(state.tree:get_node().path, { system = true })
       end,
     },
+    open_files_do_not_replace_types = { "terminal", "qf", "trouble", "coctree" },
     default_component_configs = {
       indent = { with_expanders = true },
     },

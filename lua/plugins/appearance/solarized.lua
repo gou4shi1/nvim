@@ -15,6 +15,12 @@ return {
         CocSemTypeEnumMember = { fg = "#AD7FA8" },
         CocSemTypeNamespace = { fg = "DarkCyan" },
         CocSemTypeProperty = { fg = "DarkGrey" },
+        -- rainbow
+        RainbowDelimiterBlue = { fg = "RoyalBlue3" },
+        RainbowDelimiterOrange = { fg = "DarkOrange3" },
+        RainbowDelimiterGreen = { fg = "SeaGreen3" },
+        RainbowDelimiterRed = { fg = "FireBrick" },
+        RainbowDelimiterYellow = { fg = "DarkOrchid3" },
       }
     end,
   },

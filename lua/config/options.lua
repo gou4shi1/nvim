@@ -64,3 +64,17 @@ vim.opt.wildmode = "longest:full,full"
 
 -- message
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+
+-- diagnostic
+vim.diagnostic.config({
+  virtual_text = false,
+  jump = { float = true },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+    },
+  },
+})

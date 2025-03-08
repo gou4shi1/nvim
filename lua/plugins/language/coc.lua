@@ -42,12 +42,8 @@ return {
       {}
     )
 
-    -- diagnostic
-    vim.keymap.set("n", "<C-k>", "<Plug>(coc-diagnostic-prev)", { silent = true })
-    vim.keymap.set("n", "<C-j>", "<Plug>(coc-diagnostic-next)", { silent = true })
-    vim.keymap.set("n", "<C-y>", "<Plug>(coc-fix-current)", { silent = true })
-
     -- code action
+    vim.keymap.set("n", "<localleader>d", "<Plug>(coc-fix-current)", { silent = true })
     vim.keymap.set("n", "<leader><leader>a", "<Plug>(coc-codeaction-cursor)", { silent = true })
     vim.keymap.set("x", "<leader><leader>a", "<Plug>(coc-codeaction-selected)", { silent = true })
 

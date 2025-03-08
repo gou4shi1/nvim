@@ -17,7 +17,7 @@ return {
       always_show_bufferline = false,
       close_command = function(n) Snacks.bufdelete(n) end,
       right_mouse_command = function(n) Snacks.bufdelete(n) end,
-      diagnostics = "coc",
+      diagnostics = "nvim_lsp",
       offsets = {
         { filetype = "snacks_layout_box" },
       },

@@ -8,6 +8,7 @@
 
   "codeLens.enable": true,
 
+  "diagnostic.displayByVimDiagnostic": true,
   "diagnostic.enableMessage": "jump",
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextAlign": "right",

@@ -9,3 +9,7 @@ vim.keymap.set(
   "getcmdtype() == ':' ? expand('%:h').'/' : '%%'",
   { expr = true, noremap = true }
 )
+
+-- TODO: remove after v0.11.0
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)

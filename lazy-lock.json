@@ -5,6 +5,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "coc-fzf": { "branch": "master", "commit": "6f19832e9e80ceacb98faac2688364b4f7a5b8e4" },
   "coc.nvim": { "branch": "release", "commit": "72754c99955097fddd509c9fcce589255a643b16" },
+  "conform.nvim": { "branch": "master", "commit": "db8a4a9edb217067b1d7a2e0362c74bfe9cc944d" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
   "fzf": { "branch": "master", "commit": "3ba82b6d87348b119f9a7fd168ad8a597a18b4b2" },

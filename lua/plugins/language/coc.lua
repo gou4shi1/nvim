@@ -14,8 +14,9 @@ return {
     -- format
     vim.g.coc_trim_trailing_whitespace = 1
     vim.g.coc_trim_final_newlines = 1
-    vim.keymap.set("n", "<Leader>=", "<Plug>(coc-format)", { silent = true })
-    vim.keymap.set("x", "<Leader>=", "<Plug>(coc-format-selected)", { silent = true })
+    -- config in format.lua
+    -- vim.keymap.set("n", "<Leader>=", "<Plug>(coc-format)", { silent = true })
+    -- vim.keymap.set("x", "<Leader>=", "<Plug>(coc-format-selected)", { silent = true })
 
     -- completion
     function _G.check_back_space()

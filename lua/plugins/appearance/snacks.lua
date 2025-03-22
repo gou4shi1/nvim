@@ -1,9 +1,13 @@
 return {
   "snacks.nvim",
   keys = {
-    { "<Leader>q",  function() Snacks.bufdelete() end,       desc = "Delete buffers without disrupting windows." },
-    { "<Leader>bo", function() Snacks.bufdelete.other() end, desc = "Delete all buffers except the current one." },
-    { "<Leader>gb", function() Snacks.git.blame_line() end,  desc = "Git Blame Line." },
+    { "<Leader>q",  function() Snacks.bufdelete() end,                                            desc = "Delete buffers without disrupting windows." },
+    { "<Leader>bo", function() Snacks.bufdelete.other() end,                                      desc = "Delete all buffers except the current one." },
+    { "<Leader>gb", function() Snacks.git.blame_line() end,                                       desc = "Git Blame Line." },
+    { "<F9>",       function() Snacks.terminal.toggle(nil, { env = { EDITOR = 'nvim' } }) end,    desc = "Toggle Terminal (bottom)",                  mode = "n" },
+    { "<F9>",       "<cmd>close<cr>",                                                             desc = "Toggle Terminal (bottom)",                  mode = "t" },
+    { "<F10>",      function() Snacks.terminal.toggle(nil, { win = { position = "float" } }) end, desc = "Toggle Terminal (float)",                   mode = "n" },
+    { "<F10>",      "<cmd>close<cr>",                                                             desc = "Toggle Terminal (float)",                   mode = "t" },
   },
   opts = {
     indent = { enabled = true },

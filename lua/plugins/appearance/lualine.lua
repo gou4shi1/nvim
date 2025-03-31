@@ -79,7 +79,7 @@ return {
             padding = { left = 1, right = 0 }
           },
           {
-            LazyVim.lualine.pretty_path(),
+            LazyVim.lualine.pretty_path({ length = 4 }),
             padding = { left = 0, right = 1 },
           },
           {

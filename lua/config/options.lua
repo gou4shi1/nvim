@@ -78,3 +78,8 @@ vim.diagnostic.config({
     },
   },
 })
+
+-- clipboard
+if vim.env.SSH_TTY ~= nil then
+  vim.g.clipboard = "osc52"
+end

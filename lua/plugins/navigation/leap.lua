@@ -1,5 +1,5 @@
 return {
-  "ggandor/leap.nvim",
+  "gou4shi1/leap.nvim",
   keys = {
     { "s", mode = { "n", "x", "o" }, desc = "Jump to anywhere with 2-chars." },
   },

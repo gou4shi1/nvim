@@ -1,5 +1,6 @@
 return {
   "HiPhish/rainbow-delimiters.nvim",
+  submodules = false,
   event = "VeryLazy",
   config = function()
     vim.g.rainbow_delimiters = {

@@ -58,7 +58,7 @@
   "suggest.defaultSortMethod": "none",
   "suggest.labelMaxLength": 100,
   "suggest.reversePumAboveCursor": true,
-  "suggest.virtualText": true,
+  "suggest.virtualText": false,
 
   "yank.highlight.enable": false,
 

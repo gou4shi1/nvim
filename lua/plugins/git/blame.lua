@@ -11,6 +11,20 @@ return {
         hl_mode = "combine",
       },
     },
+    config = function(_, opts)
+      require("gitblame").setup(opts)
+      -- Disable virtual text in insert mode, re-enable in normal mode
+      vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+        callback = function()
+          vim.cmd("GitBlameDisable")
+        end,
+      })
+      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+        callback = function()
+          vim.cmd("GitBlameEnable")
+        end,
+      })
+    end,
   },
 
   {

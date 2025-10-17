@@ -11,7 +11,7 @@ vim.opt.shiftwidth = 2
 -- fold
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+vim.opt.foldexpr = "v:lua.require'lazyvim.util'.treesitter.foldexpr()"
 
 -- search
 vim.opt.ignorecase = true

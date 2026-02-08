@@ -1,5 +1,5 @@
 return {
-  "gou4shi1/noice.nvim",
+  "folke/noice.nvim",
   event = "VeryLazy",
   keys = {
     { "<Leader>nl", desc = "Noice Last Message", function() require("noice").cmd("last") end },

@@ -26,6 +26,7 @@
   "session.saveOnVimLeave": false,
 
   "snippets.snipmate.enable": false,
+  "snippets.ultisnips.pythonPrompt": false,
 
   "suggest.completionItemKindLabels": {
     "text": "󰉿 text",

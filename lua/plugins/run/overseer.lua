@@ -1,12 +1,10 @@
 return {
   "stevearc/overseer.nvim",
   cmd = {
+    "OverseerOpen",
+    "OverseerClose",
     "OverseerToggle",
     "OverseerRun",
-    "OverseerRunCmd",
-    "OverseerInfo",
-    "OverseerBuild",
-    "OverseerQuickAction",
     "OverseerTaskAction",
   },
   keys = {

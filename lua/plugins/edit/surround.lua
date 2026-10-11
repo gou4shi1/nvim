@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.surround",
+  "nvim-mini/mini.surround",
   keys = {
     { "ys", desc = "Add Surrounding",    mode = { "n", "v" } },
     { "ds", desc = "Delete Surrounding" },

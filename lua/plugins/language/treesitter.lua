@@ -1,103 +1,150 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
-    event = { "VeryLazy" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
-      -- Luckily, the only things that those plugins need are the custom queries, which we make available
-      -- during startup.
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
+    branch = "main",
+    version = false, -- last release is way too old and doesn't work on Windows
+    build = function()
+      local TS = require("nvim-treesitter")
+      if not TS.get_installed then
+        LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
+        return
+      end
+      -- make sure we're using the latest treesitter util
+      package.loaded["lazyvim.util.treesitter"] = nil
+      LazyVim.treesitter.build(function()
+        TS.update(nil, { summary = true })
+      end)
     end,
-    cmd = { "TSInstall", "TSUpdate" },
+    event = { "LazyFile", "VeryLazy" },
+    cmd = { "TSInstall", "TSUpdate", "TSLog", "TSUninstall" },
     opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      auto_install = true,
-      ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "gitcommit", "gitignore", "gitattributes", "git_config", "git_rebase",
-        "html",
-        "javascript", "jsdoc",
-        "json", "jsonc",
-        "lua", "luadoc", "luap",
-        "markdown", "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "typescript", "tsx",
-        "vim", "vimdoc",
-        "xml",
-        "yaml",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "<C-CR>",
-          node_decremental = "<BS>",
-        },
-      },
-      textobjects = {
-        move = {
-          enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-        },
-        swap = {
-          enable = true,
-          swap_next = { ["<leader>]"] = "@parameter.inner" },
-          swap_previous = { ["<leader>["] = "@parameter.inner" },
-        },
-      },
+      ensure_installed = { "markdown_inline", "jsdoc", "printf", "luadoc", "luap" },
     },
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      local TS = require("nvim-treesitter")
+
+      -- setup treesitter
+      TS.setup(opts)
+      LazyVim.treesitter.get_installed(true) -- initialize the installed langs
+
+      -- install missing parsers
+      local install = vim.tbl_filter(function(lang)
+        return not LazyVim.treesitter.have(lang)
+      end, opts.ensure_installed or {})
+      if #install > 0 then
+        LazyVim.treesitter.build(function()
+          TS.install(install, { summary = true }):await(function()
+            LazyVim.treesitter.get_installed(true) -- refresh the installed langs
+          end)
+        end)
+      end
+
+      -- enable highlight and indent
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("lazyvim_treesitter", { clear = true }),
+        callback = function(ev)
+          if not LazyVim.treesitter.have(ev.match) then
+            return
+          end
+          pcall(vim.treesitter.start, ev.buf)
+          vim.bo[ev.buf].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+        end,
+      })
+
+      -- auto install
+      local installing = {}
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("ts_auto_install", { clear = true }),
+        callback = function(ev)
+          local lang = vim.treesitter.language.get_lang(ev.match)
+          if not lang or installing[lang] or LazyVim.treesitter.have(ev.match) then
+            return
+          end
+          if not require("nvim-treesitter.parsers")[lang] then
+            return
+          end
+          installing[lang] = true
+          LazyVim.treesitter.build(function()
+            require("nvim-treesitter").install({ lang }, { summary = true }):await(function()
+              LazyVim.treesitter.get_installed(true) -- refresh installed cache
+              vim.api.nvim_exec_autocmds("FileType", { buffer = ev.buf })
+              installing[lang] = nil
+            end)
+          end)
+        end,
+      })
     end,
   },
 
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     event = "VeryLazy",
-    enabled = true,
-    config = function()
-      -- If treesitter is already loaded, we need to run config again for textobjects
-      if LazyVim.is_loaded("nvim-treesitter") then
-        local opts = LazyVim.opts("nvim-treesitter")
-        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
+    keys = {
+      { "<leader>]", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner", "textobjects") end, desc = "Swap Next Parameter" },
+      { "<leader>[", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner", "textobjects") end, desc = "Swap Previous Parameter" },
+    },
+    opts = {
+      move = {
+        set_jumps = true, -- whether to set jumps in the jumplist
+        -- LazyVim extention to create buffer-local keymaps
+        keys = {
+          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+        },
+      },
+    },
+    config = function(_, opts)
+      local TS = require("nvim-treesitter-textobjects")
+      if not TS.setup then
+        LazyVim.error("Please use `:Lazy` and update `nvim-treesitter`")
+        return
       end
+      TS.setup(opts)
 
-      -- When in diff mode, we want to use the default
-      -- vim text objects c & C instead of the treesitter ones.
-      local move = require("nvim-treesitter.textobjects.move")
-      local configs = require("nvim-treesitter.configs")
-      for name, fn in pairs(move) do
-        if name:find("goto") == 1 then
-          move[name] = function(q, ...)
-            if vim.wo.diff then
-              local config = configs.get_module("textobjects.move")[name]
-              for key, query in pairs(config or {}) do
-                if q == query and key:find("[%]%[][cC]") then
-                  vim.cmd("normal! " .. key)
-                  return
-                end
-              end
+      local function attach(buf)
+        local ft = vim.bo[buf].filetype
+        if not LazyVim.treesitter.have(ft, "textobjects") then
+          return
+        end
+        ---@type table<string, table<string, string>>
+        local moves = vim.tbl_get(opts, "move", "keys") or {}
+
+        for method, keymaps in pairs(moves) do
+          for key, query in pairs(keymaps) do
+            local queries = type(query) == "table" and query or { query }
+            local parts = {}
+            for _, q in ipairs(queries) do
+              local part = q:gsub("@", ""):gsub("%..*", "")
+              part = part:sub(1, 1):upper() .. part:sub(2)
+              table.insert(parts, part)
             end
-            return fn(q, ...)
+            local desc = table.concat(parts, " or ")
+            desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+            desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+            vim.keymap.set({ "n", "x", "o" }, key, function()
+              if vim.wo.diff and key:find("[cC]") then
+                return vim.cmd("normal! " .. key)
+              end
+              require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+            end, {
+              buffer = buf,
+              desc = desc,
+              silent = true,
+            })
           end
         end
       end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("lazyvim_treesitter_textobjects", { clear = true }),
+        callback = function(ev)
+          attach(ev.buf)
+        end,
+      })
+      vim.tbl_map(attach, vim.api.nvim_list_bufs())
     end,
   },
 

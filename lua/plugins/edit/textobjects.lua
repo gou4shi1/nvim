@@ -5,6 +5,14 @@ return {
     local ai = require("mini.ai")
     return {
       n_lines = 500,
+      mappings = {
+        -- free `an`/`in` for the nvim 0.12 built-in incremental selection
+        around_next = "aN",
+        inside_next = "iN",
+        -- free `al`/`il` for the nvim 0.13 built-in incremental selection
+        around_last = "aL",
+        inside_last = "iL",
+      },
       custom_textobjects = {
         o = ai.gen_spec.treesitter({ -- code block
           a = { "@block.outer", "@conditional.outer", "@loop.outer" },

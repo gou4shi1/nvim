@@ -8,6 +8,8 @@ return {
     { "<F9>",       "<cmd>close<cr>",                                                             desc = "Toggle Terminal (bottom)",                  mode = "t" },
     { "<F10>",      function() Snacks.terminal.toggle(nil, { win = { position = "float" } }) end, desc = "Toggle Terminal (float)",                   mode = "n" },
     { "<F10>",      "<cmd>close<cr>",                                                             desc = "Toggle Terminal (float)",                   mode = "t" },
+    { "]]",         function() Snacks.words.jump(vim.v.count1) end,                              desc = "Next Reference (by cursor)" },
+    { "[[",         function() Snacks.words.jump(-vim.v.count1) end,                              desc = "Prev Reference (by cursor)" },
   },
   opts = {
     indent = { enabled = true },
@@ -17,6 +19,7 @@ return {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
+    words = { enabled = true },
     styles = {
       notification = {
         focusable = false,

@@ -5,6 +5,7 @@ return {
     { "<leader><leader>l", "<cmd>Trouble loclist toggle<cr>",     desc = "Location List (Trouble)" },
     { "<leader><leader>q", "<cmd>Trouble qflist toggle<cr>",      desc = "Quickfix List (Trouble)" },
     { "<leader><leader>d", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+    { "<leader><leader>t", "<cmd>Trouble symbols toggle<cr>",     desc = "Outline (Trouble)" },
     {
       "[q",
       function()

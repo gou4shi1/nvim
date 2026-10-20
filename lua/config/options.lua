@@ -67,8 +67,11 @@ vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
 -- diagnostic
 vim.diagnostic.config({
-  virtual_text = false,
-  jump = { float = true },
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+    end,
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = " ",

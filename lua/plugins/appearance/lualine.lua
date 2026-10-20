@@ -62,6 +62,15 @@ return {
 
     vim.o.laststatus = vim.g.lualine_laststatus
 
+    local symbols = require("trouble").statusline({
+      mode = "lsp_document_symbols",
+      groups = {},
+      title = false,
+      filter = { range = true },
+      format = "{kind_icon}{symbol.name:Normal}",
+      hl_group = "lualine_c_normal",
+    })
+
     local opts = {
       options = {
         globalstatus = vim.o.laststatus == 3,
@@ -83,17 +92,8 @@ return {
             padding = { left = 0, right = 1 },
           },
           {
-            'b:coc_current_function',
-            color = {
-              gui = 'italic',
-              fg = Snacks.util.color("Function"),
-            },
-          },
-          {
-            'g:coc_status',
-            color = {
-              fg = Snacks.util.color("Comment"),
-            },
+            symbols.get,
+            cond = symbols.has,
           },
         },
 

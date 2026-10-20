@@ -36,6 +36,15 @@ return {
             vertical   = "down:50%",
           },
         },
+        lsp = {
+          winopts = {
+            preview = {
+              layout = "vertical",
+              vertical = "up:50%",
+              border = { "╭", "─", "╮", "│", "", "", "", "│" },
+            },
+          },
+        },
         files = {
           cwd_prompt = false,
         },
@@ -132,22 +141,9 @@ return {
       { "<C-f>v",     "<cmd>FzfLua commands<cr>",               desc = "Vim Commands" },
       { "<C-f>h",     "<cmd>FzfLua help_tags<cr>",              desc = "Help Tags" },
       { "<C-f><C-f>", "<cmd>FzfLua resume<cr>",                 desc = "Resume" },
+      { "<C-f>y",     "<cmd>FzfLua registers<cr>",              desc = "Registers" },
       { "<leader>gl", "<cmd>FzfLua git_commits<cr>",            desc = "Git Log" },
       { "<leader>gs", "<cmd>FzfLua git_status<cr>",             desc = "Git Status" },
-    },
-  },
-
-  {
-    "antoinemadec/coc-fzf",
-    dependencies = { "junegunn/fzf", "junegunn/fzf.vim" },
-    event = "VeryLazy",
-    cmd = "CocFzfList",
-    keys = {
-      { "<C-f>d", "<cmd>CocFzfList diagnostics --current-buf<cr>", desc = "Diagnostics" },
-      { "<C-f>t", "<cmd>CocFzfList outline<cr>",                   desc = "Outline" },
-      { "<C-f>s", "<cmd>CocFzfList symbols<cr>",                   desc = "Symbols" },
-      { "<C-f>y", "<cmd>CocFzfList yank<cr>",                      desc = "Yank History" },
-      { "<C-f>c", "<cmd>CocFzfList commands<cr>",                  desc = "Coc Commands" },
     },
   },
 }

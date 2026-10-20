@@ -12,9 +12,14 @@ return {
         DiffRemoved = { fg = colors.git_delete },
         -- semantic
         Parameter = { link = "Identifier" },
-        CocSemTypeEnumMember = { fg = "#AD7FA8" },
-        CocSemTypeNamespace = { fg = "DarkCyan" },
-        CocSemTypeProperty = { fg = "DarkGrey" },
+        ["@lsp.type.enumMember"] = { fg = "#AD7FA8" },
+        ["@lsp.type.namespace"] = { fg = "DarkCyan" },
+        ["@lsp.type.property"] = { fg = "DarkGrey" },
+        ["@lsp.typemod.variable.classScope"] = { link = "@lsp.type.property" },
+        -- reference
+        -- LspReferenceText = { link = "CursorColumn" },
+        LspReferenceRead = { link = "CursorColumn" },
+        LspReferenceWrite = { link = "CursorColumn" },
         -- rainbow
         RainbowDelimiterBlue = { fg = "RoyalBlue3" },
         RainbowDelimiterOrange = { fg = "DarkOrange3" },

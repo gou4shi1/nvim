@@ -2,10 +2,22 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
-    dependencies = { "saghen/blink.lib" },
+    dependencies = {
+      "saghen/blink.lib",
+      "marcoSven/blink-cmp-yanky",
+    },
     build = "nix build .#blink-cmp --out-link result && cp -Lf result/lib/libblink_cmp_fuzzy.so lib/ && rm -f result",
     event = { "InsertEnter", "CmdlineEnter" },
     opts = {
+      sources = {
+        default = { "lsp", "path", "buffer", "snippets", "yank" },
+        providers = {
+          yank = {
+            name = "yank",
+            module = "blink-yanky",
+          },
+        },
+      },
       completion = {
         menu = {
           draw = { treesitter = { "lsp" } },

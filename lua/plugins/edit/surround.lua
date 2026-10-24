@@ -1,15 +1,21 @@
 return {
   "nvim-mini/mini.surround",
   keys = {
-    { "ys", desc = "Add Surrounding",    mode = { "n", "v" } },
-    { "ds", desc = "Delete Surrounding" },
-    { "cs", desc = "Replace Surrounding" },
+    { "<leader>sa", desc = "Add Surrounding",                mode = { "n", "v" } },
+    { "<leader>sd", desc = "Delete Surrounding" },
+    { "<leader>sr", desc = "Replace Surrounding" },
+    { "<leader>sf", desc = "Find Surrounding (to the right)" },
+    { "<leader>sF", desc = "Find Surrounding (to the left)" },
+    { "<leader>sh", desc = "Highlight Surrounding" },
   },
   opts = {
     mappings = {
-      add = "ys",
-      delete = "ds",
-      replace = "cs",
+      add = "<leader>sa",
+      delete = "<leader>sd",
+      replace = "<leader>sr",
+      find = '<leader>sf',
+      find_left = '<leader>sF',
+      highlight = '<leader>sh',
     },
   },
 }

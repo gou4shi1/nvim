@@ -141,7 +141,6 @@ return {
       { "<C-f>v",     "<cmd>FzfLua commands<cr>",               desc = "Vim Commands" },
       { "<C-f>h",     "<cmd>FzfLua help_tags<cr>",              desc = "Help Tags" },
       { "<C-f><C-f>", "<cmd>FzfLua resume<cr>",                 desc = "Resume" },
-      { "<C-f>y",     "<cmd>FzfLua registers<cr>",              desc = "Registers" },
       { "<leader>gl", "<cmd>FzfLua git_commits<cr>",            desc = "Git Log" },
       { "<leader>gs", "<cmd>FzfLua git_status<cr>",             desc = "Git Status" },
     },

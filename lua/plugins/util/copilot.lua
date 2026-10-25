@@ -2,7 +2,9 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    event = vim.fn.filereadable(vim.fn.expand("~/.config/github-copilot/apps.json")) == 1
+        and "InsertEnter"
+      or nil,
     opts = {
       suggestion = {
         auto_trigger = true,
